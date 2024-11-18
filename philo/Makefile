@@ -10,9 +10,11 @@
 #------------------------------------------------------------------------------#
 
 # Compiler and flags
-CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -I$(INC_DIR)
-DEBUG	=	-g3 -fsanitize=address
+CC		=	clang
+CFLAGS	=	$(DEBUG) $(DEBUG_MEM) -I$(INC_DIR)
+TEMP	=	-Wall -Werror -Wextra
+DEBUG	=	-g3
+DEBUG_MEM	=	-fsanitize=memory
 RM		=	rm -rf
 
 # Output file name
@@ -21,8 +23,12 @@ NAME	=	philo
 # Directories
 INC_DIR			=	includes/
 OBJS_DIR		=	bin/
+SRCS_DIR		=	srcs/
 
-SRCS_FILES		=	main.c
+SRCS_FILES		=	srcs/error.c \
+					srcs/main.c \
+					srcs/parsing.c \
+					srcs/utils_libft.c
 
 OBJS_FILES		=	$(patsubst %.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
 
