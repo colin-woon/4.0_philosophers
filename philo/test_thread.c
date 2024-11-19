@@ -1,50 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <unistd.h>
+#include <sys/time.h>
 
-// Define a structure to hold the counter and mutex
-typedef struct {
-    int counter;
-    pthread_mutex_t lock;
-} ThreadData;
+#define NUM_THREADS 5
+#define DELAY 100 // 100 milliseconds
 
-void* increment_counter(void* arg) {
-    ThreadData* data = (ThreadData*)arg;
+void* thread_function(void* arg) {
+    struct timeval start, end;
+    gettimeofday(&start, NULL);
 
-    // Lock the mutex before accessing the shared resource
-    pthread_mutex_lock(&data->lock);
+    // Simulate some work with a delay
+    usleep(DELAY);
 
-    // Increment the counter
-    data->counter++;
-    printf("Counter value: %d\n", data->counter);
+    gettimeofday(&end, NULL);
 
-    // Unlock the mutex after accessing the shared resource
-    pthread_mutex_unlock(&data->lock);
+    long elapsed = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
+    printf("Thread %ld elapsed time: %ld microseconds\n", (long)arg, elapsed);
 
     return NULL;
 }
 
 int main() {
-    pthread_t thread1, thread2;
-    ThreadData data;
-    data.counter = 0;
+    pthread_t threads[NUM_THREADS];
+    int rc;
+    long t;
 
-    // Initialize the mutex
-    if (pthread_mutex_init(&data.lock, NULL) != 0) {
-        printf("Mutex init failed\n");
-        return 1;
+    for (t = 0; t < NUM_THREADS; t++) {
+        rc = pthread_create(&threads[t], NULL, thread_function, (void*)t);
+        if (rc) {
+            printf("ERROR; return code from pthread_create() is %d\n", rc);
+            exit(-1);
+        }
     }
 
-    // Create two threads
-    pthread_create(&thread1, NULL, increment_counter, &data);
-    pthread_create(&thread2, NULL, increment_counter, &data);
-
-    // Wait for both threads to finish
-    pthread_join(thread1, NULL);
-    pthread_join(thread2, NULL);
-
-    // Destroy the mutex
-    pthread_mutex_destroy(&data.lock);
+    for (t = 0; t < NUM_THREADS; t++) {
+        pthread_join(threads[t], NULL);
+    }
 
     return 0;
 }

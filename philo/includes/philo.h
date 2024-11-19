@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/18 21:02:22 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/19 15:07:11 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,29 @@
 #include <pthread.h>
 
 # define ARG_ERROR -1
+# define MAX_PHILO 200
 
 typedef struct s_philo {
-	pthread_t	*thread;
-	int	which;
-	// int	i_first;
-	// int	i_last;
-	int	total;
-	pthread_mutex_t	*forks;
-	int	total_forks;
+	pthread_t	thread;
+	int	id;
+	int	nth_meal;
+	int fork[2];
+	time_t	last_meal;
+	// pthread_mutex_t	*forks;
+	// int	total_forks;
 }	t_philo;
 
-typedef struct s_status {
+
+typedef struct s_table {
+	int	total_philos;
 	int	die_at;
 	int	eat_at;
 	int	think_at;
-	// int	death;
-}	t_status;
-
-typedef struct s_data {
-	t_philo	*philo;
-	t_status	*status;
 	int	total_meals;
-}	t_data;
+	t_philo	philo[MAX_PHILO];
+	pthread_t	monitor;
+	int	timestamp
+}	t_table;
 
 // Error Handling
 
