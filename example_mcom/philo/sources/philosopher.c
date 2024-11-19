@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 15:12:00 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/08/10 00:17:37 by mcombeau         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:51:25 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	eat_sleep_routine(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[0]]);
 	write_status(philo, false, GOT_FORK_1);
+	usleep(100);
 	pthread_mutex_lock(&philo->table->fork_locks[philo->fork[1]]);
 	write_status(philo, false, GOT_FORK_2);
 	write_status(philo, false, EATING);
@@ -36,8 +37,8 @@ static void	eat_sleep_routine(t_philo *philo)
 		pthread_mutex_unlock(&philo->meal_time_lock);
 	}
 	write_status(philo, false, SLEEPING);
-	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[1]]);
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[0]]);
+	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork[1]]);
 	philo_sleep(philo->table, philo->table->time_to_sleep);
 }
 

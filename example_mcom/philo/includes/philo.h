@@ -29,7 +29,7 @@
 # define STR_MAX_PHILOS "250"
 
 # ifndef DEBUG_FORMATTING
-#  define DEBUG_FORMATTING 0
+#  define DEBUG_FORMATTING 1
 # endif
 
 # define NC		"\e[0m"

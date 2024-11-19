@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:58:25 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/18 20:32:30 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/19 21:12:18 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_atoi(const char *str)
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
-			is_negative *= -1;
+			return (-1);
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')

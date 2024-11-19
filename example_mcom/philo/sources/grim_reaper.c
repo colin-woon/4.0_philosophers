@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   grim_reaper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:00:18 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/09/10 15:05:19 by mcombeau         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:57:17 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	set_sim_stop_flag(t_table *table, bool state)
 *	is protected by a mutex lock to allow any thread to check
 *	the simulation status without conflict.
 *	Returns true if the simulation stop flag is set to true,
-*	false if the flag is set to false. 
+*	false if the flag is set to false.
 */
 bool	has_simulation_stopped(t_table *table)
 {
