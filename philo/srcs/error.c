@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 20:16:26 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/25 20:46:03 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/25 21:07:49 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	handle_error(t_table *table, int error_num);
 void	cleanup(t_table *table);
 void	destroy_mutexes(t_table *table);
+void	free_each_table_in_philo(t_table *table);
 
 void	handle_error(t_table *table, int error_num)
 {
@@ -34,7 +35,10 @@ void	handle_error(t_table *table, int error_num)
 void	cleanup(t_table *table)
 {
 	if (table->total_philos)
+	{
 		destroy_mutexes(table);
+		free_each_table_in_philo(table);
+	}
 }
 
 void	destroy_mutexes(t_table *table)
@@ -49,4 +53,18 @@ void	destroy_mutexes(t_table *table)
 		i++;
 	}
 	pthread_mutex_destroy(&table->lock_is_exit);
+}
+
+void	free_each_table_in_philo(t_table *table)
+{
+	int	i;
+
+	i = 0;
+	while (i < table->total_philos)
+	{
+		printf("number: %d\n", i);
+		if (table->philo[i].table)
+			free(table->philo[i].table);
+		i++;
+	}
 }

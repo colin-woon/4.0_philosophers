@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:48 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/25 20:45:53 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/25 20:49:56 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(int ac, char **av)
 		handle_error(NULL, ARG_ERROR);
 	if (parse_args(ac, av) == 0)
 		handle_error(NULL, FORMAT_ERROR);
-	// initialize(&table, ac, av);
-	// TEST_check_initialization(&table);
-	// cleanup(&table);
+	initialize(&table, ac, av);
+	TEST_check_initialization(&table);
+	cleanup(&table);
 }

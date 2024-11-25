@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/25 20:34:14 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/25 21:05:22 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	parse_args(int ac, char **av);
 void	initialize(t_table *table, int ac, char **av);
 void	initialize_locks(t_table *table);
 void	initialize_philo(t_table *table);
-void	assign_forks(t_philo philo);
+void	assign_forks(t_philo *philo, t_table *table);
 
 // Utils philo
 
