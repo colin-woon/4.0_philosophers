@@ -15,5 +15,11 @@ make clean
 ./philo 200 410 200 -123
 ./philo 0 410 200 200 5
 ./philo 0 410 200 200
+
+./philo 1abc00 410 200 100
+./philo 100 4abc10 200 100
+./philo 100 410 2abc00 100
+./philo 100 410 200 10abca0
+
 ./philo 100 410 200 100
 ./philo 100 410 200 100 231

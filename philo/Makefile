@@ -10,12 +10,15 @@
 #------------------------------------------------------------------------------#
 
 # Compiler and flags
-CC		=	clang
-CFLAGS	=	$(DEBUG) $(DEBUG_MEM) -I$(INC_DIR)
-TEMP	=	-Wall -Werror -Wextra
-DEBUG	=	-g3
-DEBUG_MEM	=	-fsanitize=memory
-RM		=	rm -rf
+CC				=	clang
+CFLAGS			=	$(DEBUG) $(DEBUG_ADDRESS) $(THREAD_FLAG) -I$(INC_DIR)
+TEMP			=	-Wall -Werror -Wextra
+DEBUG			=	-g3
+DEBUG_THREAD	=	-fsanitize=thread
+DEBUG_MEMORY	=	-fsanitize=memory
+DEBUG_ADDRESS	=	-fsanitize=address
+RM				=	rm -rf
+THREAD_FLAG		=	-pthread
 
 # Output file name
 NAME	=	philo
@@ -26,9 +29,12 @@ OBJS_DIR		=	bin/
 SRCS_DIR		=	srcs/
 
 SRCS_FILES		=	srcs/error.c \
+					srcs/initialize.c \
 					srcs/main.c \
 					srcs/parsing.c \
-					srcs/utils_libft.c
+					srcs/unit_testing.c \
+					srcs/utils_libft.c \
+					srcs/utils_philo.c
 
 OBJS_FILES		=	$(patsubst %.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
 

@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils_philo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 21:44:48 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/25 20:45:53 by cwoon            ###   ########.fr       */
+/*   Created: 2024/11/21 18:44:44 by cwoon             #+#    #+#             */
+/*   Updated: 2024/11/21 18:49:10 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int ac, char **av)
-{
-	t_table	table;
+time_t	get_time_in_ms(void);
 
-	if (ac != 5 && ac != 6)
-		handle_error(NULL, ARG_ERROR);
-	if (parse_args(ac, av) == 0)
-		handle_error(NULL, FORMAT_ERROR);
-	// initialize(&table, ac, av);
-	// TEST_check_initialization(&table);
-	// cleanup(&table);
+time_t	get_time_in_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }

@@ -2,22 +2,25 @@
 #include <unistd.h>
 #include <sys/time.h>
 
+time_t	get_time_in_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
 int main() {
-    struct timeval start, end;
+    time_t	start_time;
+    time_t	end_time;
+	time_t	timer;
 
-    // Get the current time before sleeping
-    gettimeofday(&start, NULL);
+	start_time = get_time_in_ms();
+	usleep(2000000);
+	end_time = get_time_in_ms();
+	timer = end_time - start_time;
 
-    // Sleep for 1 second (1,000,000 microseconds)
-    usleep(1);
-
-    // Get the current time after sleeping
-    gettimeofday(&end, NULL);
-
-    // Calculate the elapsed time in microseconds
-    long elapsed = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
-
-    printf("Elapsed time: %ld microseconds\n", elapsed);
+    printf("Elapsed time: %ld microseconds\n", timer);
 
     return 0;
 }

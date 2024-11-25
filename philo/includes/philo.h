@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/19 21:27:24 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/25 20:34:14 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 # define ARG_ERROR -1
 # define FORMAT_ERROR -2
+# define MALLOC_ERROR -3
+# define MUTEX_ERROR -4
 
 # define ERR_MSG_ARG "Arg Error: ./philo\n\
 1 - <total_philos>\n\
@@ -35,24 +37,13 @@
 2 - philo exceed 200\n\
 3 - detected negative values"
 
+# define ERR_MSG_MALLOC "Malloc Error"
+
+# define ERR_MSG_MUTEX "Mutex Error"
+
 # define MAX_PHILO 200
 
-typedef struct s_philo	t_philo;
-
-typedef struct s_table {
-	time_t	timer;
-	int	total_philos;
-	pthread_t	monitor;
-	int	die_at;
-	int	eat_at;
-	int	sleep_at;
-	int	meals_needed;
-	int	terminate;
-	pthread_mutex_t	lock_terminate;
-	pthread_mutex_t	lock_forks[MAX_PHILO];
-	int	timestamp;
-	t_philo	*philo[MAX_PHILO];
-}	t_table;
+typedef struct s_table	t_table;
 
 typedef struct s_philo {
 	pthread_t	thread;
@@ -64,11 +55,26 @@ typedef struct s_philo {
 	t_table	*table;
 }	t_philo;
 
+typedef struct s_table {
+	time_t	timer;
+	int	total_philos;
+	int	die_at;
+	int	eat_at;
+	int	sleep_at;
+	int	meals_needed;
+	int	is_exit;
+	pthread_t	monitor;
+	pthread_mutex_t	lock_is_exit;
+	pthread_mutex_t	lock_forks[MAX_PHILO];
+	t_philo	philo[MAX_PHILO];
+}	t_table;
+
+
 // Error Handling
 
-// void	clean(t_table *table, t_philo *philo);
-// void	wash_forks(t_philo *philo);
-void	handle_error(int error_num);
+void	handle_error(t_table *table, int error_num);
+void	cleanup(t_table *table);
+void	destroy_mutexes(t_table *table);
 
 // Utils libft
 
@@ -82,5 +88,19 @@ int		ft_atoi(const char *str);
 
 int	parse_args(int ac, char **av);
 
+// Initialize
+
+void	initialize(t_table *table, int ac, char **av);
+void	initialize_locks(t_table *table);
+void	initialize_philo(t_table *table);
+void	assign_forks(t_philo philo);
+
+// Utils philo
+
+time_t	get_time_in_ms(void);
+
+// Unit tests
+
+void TEST_check_initialization(t_table *table);
 
 #endif
