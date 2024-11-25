@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:21:35 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/25 21:05:33 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/25 21:14:15 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ void	initialize_philo(t_table *table)
 		table->philo[i].last_meal = 0;
 		if (pthread_mutex_init(&table->philo[i].lock_last_meal, 0) != 0)
 			return (handle_error(table, MUTEX_ERROR));
-		// table->philo[i].table = malloc(sizeof(t_table));
-		// if (table->philo[i].table == NULL)
-		// 	return (handle_error(table, MALLOC_ERROR));
 		table->philo[i].table = table;
 		i++;
 	}
