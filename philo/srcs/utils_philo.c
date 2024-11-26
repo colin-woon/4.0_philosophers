@@ -6,13 +6,15 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:44:44 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/21 18:49:10 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/26 18:35:24 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 time_t	get_time_in_ms(void);
+void	waiting(t_table *table, time_t waiting_time);
+int		is_exit_simulation(t_table *table);
 
 time_t	get_time_in_ms(void)
 {
@@ -20,4 +22,29 @@ time_t	get_time_in_ms(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+void	waiting(t_table *table, time_t waiting_time)
+{
+	time_t time_to_wakeup;
+
+	time_to_wakeup = get_time_in_ms() + waiting_time;
+	while (get_time_in_ms() < time_to_wakeup)
+	{
+		if (is_exit_simulation(table))
+			break;
+		usleep(100);
+	}
+}
+
+int	is_exit_simulation(t_table *table)
+{
+	int	status;
+
+	status = 0;
+	pthread_mutex_lock(&table->lock_is_exit);
+	if (table->is_exit == 1)
+		status = 1;
+	pthread_mutex_unlock(&table->lock_is_exit);
+	return (status);
 }

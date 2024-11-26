@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:21:35 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/25 21:14:15 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/26 17:03:27 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	assign_forks(t_philo *philo, t_table *table);
 
 void	initialize(t_table *table, int ac, char **av)
 {
-	table->timer = get_time_in_ms();
+	table->timer = 0;
 	table->total_philos = ft_atoi(av[1]);
 	table->die_at = ft_atoi(av[2]);
 	table->eat_at = ft_atoi(av[3]);

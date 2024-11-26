@@ -6,16 +6,16 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 22:10:31 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/19 21:38:41 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/26 18:46:25 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 int	validate_args(char *str);
-int	parse_args(int ac, char **av);
+int	parse_args(char **av);
 
-int	parse_args(int ac, char **av)
+int	parse_args(char **av)
 {
 	int	i;
 	int	temp;

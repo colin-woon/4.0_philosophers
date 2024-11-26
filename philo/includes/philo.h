@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/25 21:18:58 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/26 18:46:25 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,25 @@
 # define FORMAT_ERROR -2
 # define MALLOC_ERROR -3
 # define MUTEX_ERROR -4
+# define THREAD_ERROR -5
+
+#define CYAN "\033[1;36m"
+#define PURPLE "\033[1;35m"
+#define BLUE "\033[1;34m"
+#define YELLOW "\033[1;33m"
+#define GREEN "\033[1;32m"
+#define RED "\033[1;31m"
+#define COLOUR "\033[0m"
+
+typedef enum e_status
+{
+	DIED = 0,
+	EATING = 1,
+	SLEEPING = 2,
+	THINKING = 3,
+	GOT_FORK_1 = 4,
+	GOT_FORK_2 = 5
+}	t_status;
 
 # define ERR_MSG_ARG "Arg Error: ./philo\n\
 1 - <total_philos>\n\
@@ -36,10 +55,9 @@
 1 - detected non-integer\n\
 2 - philo exceed 200\n\
 3 - detected negative values"
-
 # define ERR_MSG_MALLOC "Malloc Error"
-
 # define ERR_MSG_MUTEX "Mutex Error"
+# define ERR_MSG_THREAD "Thread Error"
 
 # define MAX_PHILO 200
 
@@ -69,7 +87,6 @@ typedef struct s_table {
 	t_philo	philo[MAX_PHILO];
 }	t_table;
 
-
 // Error Handling
 
 void	handle_error(t_table *table, int error_num);
@@ -86,7 +103,7 @@ int		ft_atoi(const char *str);
 
 // Parsing
 
-int		parse_args(int ac, char **av);
+int		parse_args(char **av);
 
 // Initialize
 
@@ -95,9 +112,21 @@ void	initialize_locks(t_table *table);
 void	initialize_philo(t_table *table);
 void	assign_forks(t_philo *philo, t_table *table);
 
+// Routine
+
+void	*routine(void *data);
+void	*lonely_philo(t_philo *philo);
+
 // Utils philo
 
 time_t	get_time_in_ms(void);
+void	waiting(t_table *table, time_t waiting_time);
+int		is_exit_simulation(t_table *table);
+
+// Print
+
+void	action(t_philo *philo, t_status status);
+void	print_status(t_philo *philo, char *str, t_status status);
 
 // Unit tests
 

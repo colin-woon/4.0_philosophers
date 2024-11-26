@@ -10,8 +10,8 @@
 #------------------------------------------------------------------------------#
 
 # Compiler and flags
-CC				=	clang
-CFLAGS			=	$(DEBUG) $(THREAD_FLAG) -I$(INC_DIR)
+CC				=	gcc
+CFLAGS			=	$(TEMP) $(DEBUG) $(THREAD_FLAG) -I$(INC_DIR)
 TEMP			=	-Wall -Werror -Wextra
 DEBUG			=	-g3
 DEBUG_THREAD	=	-fsanitize=thread
@@ -32,6 +32,8 @@ SRCS_FILES		=	srcs/error.c \
 					srcs/initialize.c \
 					srcs/main.c \
 					srcs/parsing.c \
+					srcs/routine.c \
+					srcs/print.c \
 					srcs/unit_testing.c \
 					srcs/utils_libft.c \
 					srcs/utils_philo.c
