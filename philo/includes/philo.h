@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/25 21:05:22 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/25 21:18:58 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		ft_atoi(const char *str);
 
 // Parsing
 
-int	parse_args(int ac, char **av);
+int		parse_args(int ac, char **av);
 
 // Initialize
 
@@ -101,6 +101,6 @@ time_t	get_time_in_ms(void);
 
 // Unit tests
 
-void TEST_check_initialization(t_table *table);
+void	TEST_CHECK_INIT(t_table *table);
 
 #endif

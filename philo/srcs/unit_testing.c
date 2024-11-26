@@ -1,10 +1,10 @@
 #include "philo.h"
 
-void TEST_check_initialization(t_table *table);
+void TEST_CHECK_INIT(t_table *table);
 void print_table(t_table *table);
 void print_philo(t_philo *philo);
 
-void TEST_check_initialization(t_table *table)
+void TEST_CHECK_INIT(t_table *table)
 {
 	int	i;
 
