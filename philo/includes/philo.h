@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/26 18:46:25 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/29 19:49:42 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,16 @@ typedef struct s_philo {
 	int	meals_ate;
 	int	fork[2];
 	time_t	last_meal;
-	pthread_mutex_t	lock_last_meal;
+	pthread_mutex_t	lock_eat_routine;
 	t_table	*table;
 }	t_philo;
 
 typedef struct s_table {
 	time_t	timer;
 	int	total_philos;
-	int	die_at;
-	int	eat_at;
-	int	sleep_at;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
 	int	meals_needed;
 	int	is_exit;
 	pthread_t	monitor;
@@ -125,7 +125,7 @@ int		is_exit_simulation(t_table *table);
 
 // Print
 
-void	action(t_philo *philo, t_status status);
+void	print_action(t_philo *philo, t_status status);
 void	print_status(t_philo *philo, char *str, t_status status);
 
 // Unit tests

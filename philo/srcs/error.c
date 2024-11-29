@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 20:16:26 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/25 21:14:11 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/29 19:49:42 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	destroy_mutexes(t_table *table)
 	while (i < table->total_philos)
 	{
 		pthread_mutex_destroy(&table->lock_forks[i]);
-		pthread_mutex_destroy(&table->philo[i].lock_last_meal);
+		pthread_mutex_destroy(&table->philo[i].lock_eat_routine);
 		i++;
 	}
 	pthread_mutex_destroy(&table->lock_is_exit);

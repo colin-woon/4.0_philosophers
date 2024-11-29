@@ -6,11 +6,14 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:48 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/26 19:45:38 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/29 19:12:45 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	simulate(t_table *table);
+void	exit_simulation(t_table *table);
 
 void	simulate(t_table *table)
 {

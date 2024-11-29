@@ -6,16 +6,16 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:39:46 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/26 19:46:45 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/29 19:10:24 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	action(t_philo *philo, t_status status);
+void	print_action(t_philo *philo, t_status status);
 void	print_status(t_philo *philo, char *str, t_status status);
 
-void	action(t_philo *philo, t_status status)
+void	print_action(t_philo *philo, t_status status)
 {
 	if (status == DIED)
 		print_status(philo, "died", status);
