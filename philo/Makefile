@@ -10,7 +10,7 @@
 #------------------------------------------------------------------------------#
 
 # Compiler and flags
-CC				=	gcc
+CC				=	clang
 CFLAGS			=	$(TEMP) $(DEBUG) $(THREAD_FLAG) -I$(INC_DIR)
 TEMP			=	-Wall -Werror -Wextra
 DEBUG			=	-g3

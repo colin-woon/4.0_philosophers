@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:39:46 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/26 18:52:43 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/11/26 19:46:45 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	action(t_philo *philo, t_status status)
 		print_status(philo, "is sleeping", status);
 	else if (status == THINKING)
 		print_status(philo, "is thinking", status);
-	else if (status == GOT_FORK_1 || GOT_FORK_2)
+	else if (status == GOT_FORK_1 || status == GOT_FORK_2)
 		print_status(philo, "has taken a fork", status);
 }
 
@@ -42,7 +42,7 @@ void	print_status(t_philo *philo, char *str, t_status status)
 		status_colour = PURPLE;
 	else if (status == THINKING)
 		status_colour = YELLOW;
-	else if (status == GOT_FORK_1 || GOT_FORK_2)
+	else if (status == GOT_FORK_1 || status == GOT_FORK_2)
 		status_colour = CYAN;
 
 	printf("%ld\t" BLUE "%d\t" COLOUR "%s%s\n" COLOUR, \
