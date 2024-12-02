@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:06:56 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 21:13:30 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 21:57:13 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ void	*routine(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
-	pthread_mutex_lock(&philo->lock_eat_routine);
-	philo->last_meal = get_time_in_ms();
-	pthread_mutex_unlock(&philo->lock_eat_routine);
 	if (philo->table->total_philos == 1)
 		return (lonely_philo(philo));
 	if (philo->id % 2)

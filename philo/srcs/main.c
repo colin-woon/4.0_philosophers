@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:48 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 21:28:22 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 21:53:50 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	monitor_death(t_table *table)
 		i = 0;
 		while (infinite && i < table->total_philos)
 		{
-			usleep(200);
-			if (is_dead(&table->philo[i]) \
+			usleep(100);
+			if (table->philo->meals_required == 0 \
 			|| is_exit_simulation(table) \
-			|| table->philo->meals_required == 0)
+			|| is_dead(&table->philo[i]))
 			{
 				infinite = 0;
 				break ;
@@ -63,6 +63,9 @@ void	simulate(t_table *table)
 	table->timer = get_time_in_ms();
 	while (i < table->total_philos)
 	{
+		pthread_mutex_lock(&table->philo[i].lock_eat_routine);
+		table->philo[i].last_meal = get_time_in_ms();
+		pthread_mutex_unlock(&table->philo[i].lock_eat_routine);
 		if (pthread_create(&table->philo[i].thread, NULL, routine, \
 		(void *)&table->philo[i]) != 0)
 			return (handle_error(table, THREAD_ERROR));
