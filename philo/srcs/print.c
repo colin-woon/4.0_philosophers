@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:39:46 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 15:45:13 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 17:42:06 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	print_status(t_philo *philo, char *str, t_status status);
 
 void	print_action(t_philo *philo, t_status status)
 {
-	// pthread_mutex_lock(&philo->table->lock_printing);
+	if(philo->table->is_exit)
+		return ;
 	if (status == DIED)
 		print_status(philo, "died", status);
 	else if (status == EATING)
@@ -28,7 +29,6 @@ void	print_action(t_philo *philo, t_status status)
 		print_status(philo, "is thinking", status);
 	else if (status == GOT_FORK_1 || status == GOT_FORK_2)
 		print_status(philo, "has taken a fork", status);
-	// pthread_mutex_unlock(&philo->table->lock_printing);
 }
 
 void	print_status(t_philo *philo, char *str, t_status status)
