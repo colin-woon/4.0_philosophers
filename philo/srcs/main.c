@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:48 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 17:44:21 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 21:00:50 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,30 @@
 
 void	simulate(t_table *table);
 void	exit_simulation(t_table *table);
+void	monitor_death(t_table *table);
+
+void	monitor_death(t_table *table)
+{
+	int	i;
+	int	infinite;
+
+	i = 0;
+	infinite = 1;
+	while (infinite)
+	{
+		i = 0;
+		while (infinite && i < table->total_philos)
+		{
+			usleep(200);
+			if (is_dead(&table->philo[i]) || is_exit_simulation(table))
+			{
+				infinite = 0;
+				break;
+			}
+			i++;
+		}
+	}
+}
 
 void	simulate(t_table *table)
 {
@@ -27,6 +51,8 @@ void	simulate(t_table *table)
 			return (handle_error(table, THREAD_ERROR));
 		i++;
 	}
+	if (table->total_philos > 1)
+		monitor_death(table);
 }
 
 void	exit_simulation(t_table *table)

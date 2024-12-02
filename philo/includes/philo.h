@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 20:00:45 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 20:47:15 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_table {
 	pthread_t	monitor;
 	pthread_mutex_t	lock_print;
 	pthread_mutex_t	lock_is_exit;
+	pthread_mutex_t	lock_is_dead;
 	pthread_mutex_t	lock_forks[MAX_PHILO];
 	t_philo	philo[MAX_PHILO];
 }	t_table;
