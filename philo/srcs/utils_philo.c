@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:44:44 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 16:25:19 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 17:43:51 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 time_t	get_time_in_ms(void);
 void	waiting(t_table *table, time_t waiting_time);
 int		is_exit_simulation(t_table *table);
+int		is_dead(t_philo *philo);
 
 time_t	get_time_in_ms(void)
 {
@@ -47,4 +48,18 @@ int	is_exit_simulation(t_table *table)
 		status = 1;
 	pthread_mutex_unlock(&table->lock_is_exit);
 	return (status);
+}
+
+int	is_dead(t_philo *philo)
+{
+	// printf("HELLO\n");
+	if (get_time_in_ms() - philo->last_meal >= philo->table->time_to_die)
+	{
+		print_action(philo, DIED);
+		pthread_mutex_lock(&philo->table->lock_is_exit);
+		philo->table->is_exit = 1;
+		pthread_mutex_unlock(&philo->table->lock_is_exit);
+		return (1);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 17:25:06 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 17:44:33 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,6 @@ void	*lonely_philo(t_philo *philo);
 time_t	get_time_in_ms(void);
 void	waiting(t_table *table, time_t waiting_time);
 int		is_exit_simulation(t_table *table);
-
-// Utils monitor
-int		has_finished_meals(t_table *table);
-void	set_is_exit(t_table *table, int status);
 int		is_dead(t_philo *philo);
 
 // Print
