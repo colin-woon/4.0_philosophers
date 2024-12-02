@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:48 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 21:08:52 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 21:20:29 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 void	simulate(t_table *table);
 void	exit_simulation(t_table *table);
 void	monitor_death(t_table *table);
+
+int	main(int ac, char **av)
+{
+	t_table	table;
+
+	if (ac != 5 && ac != 6)
+		handle_error(NULL, ARG_ERROR);
+	if (parse_args(av) == 0)
+		handle_error(NULL, FORMAT_ERROR);
+	initialize(&table, ac, av);
+	simulate(&table);
+	exit_simulation(&table);
+	return (EXIT_SUCCESS);
+}
 
 void	monitor_death(t_table *table)
 {
@@ -29,10 +43,12 @@ void	monitor_death(t_table *table)
 		while (infinite && i < table->total_philos)
 		{
 			usleep(200);
-			if (is_dead(&table->philo[i]) || is_exit_simulation(table) || table->philo->meals_required == 0)
+			if (is_dead(&table->philo[i]) \
+			|| is_exit_simulation(table) \
+			|| table->philo->meals_required == 0)
 			{
 				infinite = 0;
-				break;
+				break ;
 			}
 			i++;
 		}
@@ -47,7 +63,8 @@ void	simulate(t_table *table)
 	table->timer = get_time_in_ms();
 	while (i < table->total_philos)
 	{
-		if (pthread_create(&table->philo[i].thread, NULL, routine, (void *)&table->philo[i]) != 0)
+		if (pthread_create(&table->philo[i].thread, NULL, routine, \
+		(void *)&table->philo[i]) != 0)
 			return (handle_error(table, THREAD_ERROR));
 		i++;
 	}
@@ -65,19 +82,4 @@ void	exit_simulation(t_table *table)
 	if (table->total_philos > 1)
 		pthread_join(table->monitor, NULL);
 	cleanup(table);
-}
-
-int main(int ac, char **av)
-{
-	t_table	table;
-
-	if (ac != 5 && ac != 6)
-		handle_error(NULL, ARG_ERROR);
-	if (parse_args(av) == 0)
-		handle_error(NULL, FORMAT_ERROR);
-	initialize(&table, ac, av);
-	simulate(&table);
-	exit_simulation(&table);
-	return (EXIT_SUCCESS);
-	// TEST_CHECK_INIT(&table);
 }

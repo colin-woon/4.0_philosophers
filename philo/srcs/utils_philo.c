@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:44:44 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 20:50:28 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 21:12:55 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ time_t	get_time_in_ms(void)
 
 void	waiting(t_table *table, time_t waiting_time)
 {
-	time_t time_to_wakeup;
+	time_t	time_to_wakeup;
 
 	time_to_wakeup = get_time_in_ms() + waiting_time;
 	while (get_time_in_ms() < time_to_wakeup)
 	{
 		if (is_exit_simulation(table))
-			break;
+			break ;
 		usleep(100);
 	}
 }

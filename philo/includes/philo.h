@@ -6,19 +6,19 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 20:47:15 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 21:16:48 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <pthread.h>
+# include <string.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <pthread.h>
 
 # define ARG_ERROR -1
 # define FORMAT_ERROR -2
@@ -26,13 +26,13 @@
 # define MUTEX_ERROR -4
 # define THREAD_ERROR -5
 
-#define CYAN "\033[1;36m"
-#define PURPLE "\033[1;35m"
-#define BLUE "\033[1;34m"
-#define YELLOW "\033[1;33m"
-#define GREEN "\033[1;32m"
-#define RED "\033[1;31m"
-#define COLOUR "\033[0m"
+# define CYAN "\033[1;36m"
+# define PURPLE "\033[1;35m"
+# define BLUE "\033[1;34m"
+# define YELLOW "\033[1;33m"
+# define GREEN "\033[1;32m"
+# define RED "\033[1;31m"
+# define COLOUR "\033[0m"
 
 typedef enum e_status
 {
@@ -63,31 +63,33 @@ typedef enum e_status
 
 typedef struct s_table	t_table;
 
-typedef struct s_philo {
-	pthread_t	thread;
-	int	id;
-	int	meals_required;
-	int	fork[2];
-	time_t	last_meal;
+typedef struct s_philo
+{
+	pthread_t		thread;
+	int				id;
+	int				meals_required;
+	int				fork[2];
+	time_t			last_meal;
 	pthread_mutex_t	lock_eat_routine;
-	t_table	*table;
+	t_table			*table;
 }	t_philo;
 
-typedef struct s_table {
-	time_t	timer;
-	int	total_philos;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	meals_needed;
-	int	is_exit;
-	int	has_dead_philo;
-	pthread_t	monitor;
+typedef struct s_table
+{
+	time_t			timer;
+	int				total_philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				meals_needed;
+	int				is_exit;
+	int				has_dead_philo;
+	pthread_t		monitor;
 	pthread_mutex_t	lock_print;
 	pthread_mutex_t	lock_is_exit;
 	pthread_mutex_t	lock_is_dead;
 	pthread_mutex_t	lock_forks[MAX_PHILO];
-	t_philo	philo[MAX_PHILO];
+	t_philo			philo[MAX_PHILO];
 }	t_table;
 
 // Error Handling

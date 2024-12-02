@@ -34,7 +34,6 @@ SRCS_FILES		=	srcs/error.c \
 					srcs/parsing.c \
 					srcs/routine.c \
 					srcs/print.c \
-					srcs/unit_testing.c \
 					srcs/utils_libft.c \
 					srcs/utils_philo.c \
 
