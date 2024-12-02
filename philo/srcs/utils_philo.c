@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:44:44 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 17:43:51 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 17:51:46 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	is_exit_simulation(t_table *table)
 
 int	is_dead(t_philo *philo)
 {
-	// printf("HELLO\n");
 	if (get_time_in_ms() - philo->last_meal >= philo->table->time_to_die)
 	{
 		print_action(philo, DIED);
