@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:06:56 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 15:35:52 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 17:20:06 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ void	*routine(void *data)
 		return (lonely_philo(philo));
 	if (philo->id % 2)
 		waiting(philo->table, philo->table->time_to_sleep);
-	while (1)
+	while (!is_dead(philo))
 	{
 		eat_routine(philo);
+		if (philo->meals_required == 0)
+			break ;
 		sleep_think_routine(philo);
 	}
 	return(NULL);
@@ -57,8 +59,9 @@ void	eat_routine(t_philo *philo)
 	pthread_mutex_lock(&philo->lock_eat_routine);
 	philo->last_meal = get_time_in_ms();
 	waiting(philo->table, philo->table->time_to_eat);
+	// printf("HEREEE %d\n", philo->meals_required);
+	philo->meals_required -= 1;
 	pthread_mutex_unlock(&philo->lock_eat_routine);
-	philo->meals_ate += 1;
 	pthread_mutex_unlock(&philo->table->lock_forks[philo->fork[1]]);
 	pthread_mutex_unlock(&philo->table->lock_forks[philo->fork[0]]);
 }

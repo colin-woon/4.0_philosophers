@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 15:45:17 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 17:25:06 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_table	t_table;
 typedef struct s_philo {
 	pthread_t	thread;
 	int	id;
-	int	meals_ate;
+	int	meals_required;
 	int	fork[2];
 	time_t	last_meal;
 	pthread_mutex_t	lock_eat_routine;
@@ -81,9 +81,10 @@ typedef struct s_table {
 	int	time_to_sleep;
 	int	meals_needed;
 	int	is_exit;
+	int	has_dead_philo;
 	pthread_t	monitor;
 	pthread_mutex_t	lock_is_exit;
-	// pthread_mutex_t	lock_printing;
+	pthread_mutex_t	lock_monitor;
 	pthread_mutex_t	lock_forks[MAX_PHILO];
 	t_philo	philo[MAX_PHILO];
 }	t_table;
@@ -123,6 +124,11 @@ void	*lonely_philo(t_philo *philo);
 time_t	get_time_in_ms(void);
 void	waiting(t_table *table, time_t waiting_time);
 int		is_exit_simulation(t_table *table);
+
+// Utils monitor
+int		has_finished_meals(t_table *table);
+void	set_is_exit(t_table *table, int status);
+int		is_dead(t_philo *philo);
 
 // Print
 

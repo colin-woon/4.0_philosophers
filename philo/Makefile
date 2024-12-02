@@ -36,7 +36,8 @@ SRCS_FILES		=	srcs/error.c \
 					srcs/print.c \
 					srcs/unit_testing.c \
 					srcs/utils_libft.c \
-					srcs/utils_philo.c
+					srcs/utils_philo.c \
+					srcs/utils_monitor.c
 
 OBJS_FILES		=	$(patsubst %.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
 

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:21:35 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 15:46:09 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 17:25:24 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	initialize(t_table *table, int ac, char **av)
 	if (ac == 6)
 		table->meals_needed = ft_atoi(av[5]);
 	table->is_exit = 0;
+	table->has_dead_philo = 0;
 	initialize_locks(table);
 	initialize_philo(table);
 }
@@ -40,7 +41,7 @@ void	initialize_philo(t_table *table)
 	while (i < table->total_philos)
 	{
 		table->philo[i].id = i;
-		table->philo[i].meals_ate = 0;
+		table->philo[i].meals_required = table->meals_needed;
 		assign_forks(&table->philo[i], table);
 		table->philo[i].last_meal = 0;
 		if (pthread_mutex_init(&table->philo[i].lock_eat_routine, 0) != 0)
@@ -61,9 +62,8 @@ void	initialize_locks(t_table *table)
 			return (handle_error(table, MUTEX_ERROR));
 		i++;
 	}
-	if (pthread_mutex_init(&table->lock_is_exit, 0) != 0)
+	if (pthread_mutex_init(&table->lock_is_exit, 0) != 0 || pthread_mutex_init(&table->lock_monitor, 0) != 0)
 		return (handle_error(table, MUTEX_ERROR));
-		// || pthread_mutex_init(&table->lock_printing, 0)
 }
 
 // if (philo->id % 2)

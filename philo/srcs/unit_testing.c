@@ -31,7 +31,7 @@ void print_philo(t_philo *philo)
 {
 	printf("Philosopher Initialization:\n");
 	printf("ID: %d\n", philo->id);
-	printf("Meals Ate: %d\n", philo->meals_ate);
+	printf("Meals Ate: %d\n", philo->meals_required);
 	printf("Forks: [%d, %d]\n", philo->fork[0], philo->fork[1]);
 	printf("Last Meal: %ld\n", philo->last_meal);
 	// printf("Lock Last Meal: %p\n", (void*)&philo->lock_eat_routine);
