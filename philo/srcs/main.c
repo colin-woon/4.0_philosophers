@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:48 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 21:20:29 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 21:28:22 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,5 @@ void	exit_simulation(t_table *table)
 	i = 0;
 	while (i < table->total_philos)
 		pthread_join(table->philo[i++].thread, NULL);
-	if (table->total_philos > 1)
-		pthread_join(table->monitor, NULL);
 	cleanup(table);
 }

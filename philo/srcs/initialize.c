@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:21:35 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 21:12:02 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 21:27:28 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ void	initialize_locks(t_table *table)
 void	assign_forks(t_philo *philo, t_table *table)
 {
 	philo->fork[0] = philo->id;
-	philo->fork[1] = philo->id + 1 % table->total_philos;
+	philo->fork[1] = (philo->id + 1) % table->total_philos;
 }
