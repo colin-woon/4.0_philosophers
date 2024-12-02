@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:06:56 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 18:25:13 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 20:05:57 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ void	*routine(void *data)
 		return (lonely_philo(philo));
 	if (philo->id % 2)
 		waiting(philo->table, philo->table->time_to_sleep);
-	while (!is_dead(philo))
+	while (!is_exit_simulation(philo->table))
 	{
+		if(is_dead(philo))
+			break ;
 		eat_routine(philo);
-		if (philo->meals_required == 0)
+		if (philo->meals_required == 0 || is_dead(philo))
 			break ;
 		sleep_think_routine(philo);
 	}
@@ -56,8 +58,17 @@ void	eat_routine(t_philo *philo)
 	pthread_mutex_lock(&philo->table->lock_forks[philo->fork[1]]);
 	print_action(philo, GOT_FORK_2);
 	print_action(philo, EATING);
+	if(!is_dead(philo))
+	{
 	pthread_mutex_lock(&philo->lock_eat_routine);
 	philo->last_meal = get_time_in_ms();
+	}
+	// else
+	// {
+	// 	pthread_mutex_unlock(&philo->table->lock_forks[philo->fork[1]]);
+	// 	pthread_mutex_unlock(&philo->table->lock_forks[philo->fork[0]]);
+	// 	return ;
+	// }
 	waiting(philo->table, philo->table->time_to_eat);
 	philo->meals_required -= 1;
 	pthread_mutex_unlock(&philo->lock_eat_routine);

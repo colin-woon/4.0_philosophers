@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 20:16:26 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/29 19:49:42 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/02 20:00:51 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	destroy_mutexes(t_table *table)
 		i++;
 	}
 	pthread_mutex_destroy(&table->lock_is_exit);
+	pthread_mutex_destroy(&table->lock_print);
 }
