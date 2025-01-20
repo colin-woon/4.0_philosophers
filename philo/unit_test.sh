@@ -42,6 +42,7 @@ echo "One philosopher should die."
 
 # 2. Check if there is only one fork per philosopher
 # Test: Confirm the number of mutexes created matches the number of philosophers:
+# check assign fork function, starts from 0, but when printing, id + 1
 
 # 3. Check if there is a mutex per fork and it's used to check/change fork value
 # Review Code: Look for mutex locks and unlocks around fork access:
