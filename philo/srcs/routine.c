@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:06:56 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 21:57:13 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/18 20:25:24 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ void	eat_routine(t_philo *philo)
 	philo->last_meal = get_time_in_ms();
 	pthread_mutex_unlock(&philo->lock_eat_routine);
 	waiting(philo->table, philo->table->time_to_eat);
+	pthread_mutex_lock(&philo->table->lock_global);
 	philo->meals_required -= 1;
+	pthread_mutex_unlock(&philo->table->lock_global);
 	pthread_mutex_unlock(&philo->table->lock_forks[philo->fork[1]]);
 	pthread_mutex_unlock(&philo->table->lock_forks[philo->fork[0]]);
 }
