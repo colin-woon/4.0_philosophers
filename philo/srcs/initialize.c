@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:21:35 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 21:27:28 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/18 20:07:40 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	initialize_locks(t_table *table)
 	}
 	if (pthread_mutex_init(&table->lock_is_exit, 0) != 0 \
 	|| pthread_mutex_init(&table->lock_print, 0) != 0 \
+	|| pthread_mutex_init(&table->lock_global, 0) != 0 \
 	|| pthread_mutex_init(&table->lock_is_dead, 0) != 0)
 		return (handle_error(table, MUTEX_ERROR));
 }
