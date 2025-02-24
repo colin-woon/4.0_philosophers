@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:21:35 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 15:01:25 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 15:32:14 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	initialize_semaphores(t_table *table)
 	table->sem_is_dead = sem_open(IS_DEAD_SEM, O_CREAT, 0644, 1);
 	table->sem_is_exit = sem_open(IS_EXIT_SEM, O_CREAT, 0644, 1);
 	table->sem_global = sem_open(GLOBAL_SEM, O_CREAT, 0644, 1);
+	table->sem_eat_routine = sem_open(EAT_ROUTINE_SEM, O_CREAT, 0644, 1);
 	table->sem_forks = sem_open(FORKS_SEM, O_CREAT, 0644, table->total_philos);
 }
 

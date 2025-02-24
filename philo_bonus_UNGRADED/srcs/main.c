@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:48 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 15:20:18 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 15:32:51 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	simulate(t_table *table)
 	table->timer = get_time_in_ms();
 	while (i < table->total_philos)
 	{
-		sem_wait(table->sem_global);
+		sem_wait(table->sem_eat_routine);
 		table->philo[i].last_meal = get_time_in_ms();
-		sem_post(table->sem_global);
+		sem_post(table->sem_eat_routine);
 		table->pid = fork();
 		if (table->pid == 0)
 			routine(&table->philo[i]);

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 15:22:47 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 15:32:33 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define IS_DEAD_SEM "/semaphore_is_dead"
 # define IS_EXIT_SEM "/semaphore_is_exit"
 # define GLOBAL_SEM "/semaphore_global"
+# define EAT_ROUTINE_SEM "/semaphore_eat_routine"
 # define FORKS_SEM "/semaphore_forks"
 
 # define CYAN "\033[1;36m"
@@ -95,6 +96,7 @@ typedef struct s_table
 	sem_t		*sem_is_exit;
 	sem_t		*sem_is_dead;
 	sem_t		*sem_global;
+	sem_t		*sem_eat_routine;
 	sem_t		*sem_forks;
 	t_philo		philo[MAX_PHILO];
 }	t_table;
@@ -131,7 +133,7 @@ void	assign_forks(t_philo *philo, t_table *table);
 // Routine
 
 void	routine(t_philo *philo);
-void	*lonely_philo(t_philo *philo);
+void	lonely_philo(t_philo *philo);
 
 // Utils philo
 
