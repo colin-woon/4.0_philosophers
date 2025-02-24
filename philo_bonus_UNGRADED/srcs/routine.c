@@ -6,35 +6,32 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:06:56 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 15:09:26 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 15:23:49 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-// void	*routine(void *data);
-// void	*lonely_philo(t_philo *philo);
-// void	eat_routine(t_philo *philo);
-// void	sleep_think_routine(t_philo *philo);
+void	routine(t_philo *philo);
+void	*lonely_philo(t_philo *philo);
+void	eat_routine(t_philo *philo);
+void	sleep_think_routine(t_philo *philo);
 
-// void	*routine(void *data)
-// {
-// 	t_philo	*philo;
-
-// 	philo = (t_philo *)data;
-// 	if (philo->table->total_philos == 1)
-// 		return (lonely_philo(philo));
-// 	if (philo->id % 2)
-// 		waiting(philo->table, philo->table->time_to_sleep);
-// 	while (!is_exit_simulation(philo->table))
-// 	{
-// 		eat_routine(philo);
-// 		if (philo->meals_required == 0 || is_exit_simulation(philo->table))
-// 			break ;
-// 		sleep_think_routine(philo);
-// 	}
-// 	return (NULL);
-// }
+void	routine(t_philo *philo)
+{
+	printf("routine\n");
+	// if (philo->table->total_philos == 1)
+	// 	return (lonely_philo(philo));
+	// if (philo->id % 2)
+	// 	waiting(philo->table, philo->table->time_to_sleep);
+	// while (!is_exit_simulation(philo->table))
+	// {
+	// 	eat_routine(philo);
+	// 	if (philo->meals_required == 0 || is_exit_simulation(philo->table))
+	// 		break ;
+	// 	sleep_think_routine(philo);
+	// }
+}
 
 // void	*lonely_philo(t_philo *philo)
 // {

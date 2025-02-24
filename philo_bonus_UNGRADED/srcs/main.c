@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:48 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 15:10:31 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 15:20:18 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,25 @@ int	main(int ac, char **av)
 // 	}
 // }
 
-// void	simulate(t_table *table)
-// {
-// 	int	i;
+void	simulate(t_table *table)
+{
+	int	i;
 
-// 	i = 0;
-// 	table->timer = get_time_in_ms();
-// 	while (i < table->total_philos)
-// 	{
-// 		sem_wait(table->sem_global);
-// 		table->philo[i].last_meal = get_time_in_ms();
-// 		sem_post(table->sem_global);
-// 		if (pthread_create(&table->philo[i].thread, NULL, routine, \
-// 		(void *)&table->philo[i]) != 0)
-// 			return (handle_error(table, THREAD_ERROR));
-// 		i++;
-// 	}
-// 	if (table->total_philos > 1)
-// 		monitor_death(table);
-// }
+	i = 0;
+	table->timer = get_time_in_ms();
+	while (i < table->total_philos)
+	{
+		sem_wait(table->sem_global);
+		table->philo[i].last_meal = get_time_in_ms();
+		sem_post(table->sem_global);
+		table->pid = fork();
+		if (table->pid == 0)
+			routine(&table->philo[i]);
+		i++;
+	}
+	// if (table->total_philos > 1)
+	// 	monitor_death(table);
+}
 
 void	exit_simulation(t_table *table)
 {

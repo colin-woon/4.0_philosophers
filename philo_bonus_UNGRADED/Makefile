@@ -11,7 +11,7 @@
 
 # Compiler and flags
 CC				=	clang
-CFLAGS			=	$(DEBUG) $(THREAD_FLAG) -I$(INC_DIR)
+CFLAGS			=	$(DEBUG) -I$(INC_DIR)
 WFLAGS			=	-Wall -Werror -Wextra
 DEBUG			=	-g3
 DEBUG_THREAD	=	-fsanitize=thread

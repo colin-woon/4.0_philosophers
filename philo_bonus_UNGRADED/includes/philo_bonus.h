@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 15:06:27 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 15:22:47 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <sys/time.h>
+# include <sys/wait.h>
 # include <pthread.h>
 # include <semaphore.h>
 # include <fcntl.h>
@@ -73,28 +74,29 @@ typedef struct s_table	t_table;
 
 typedef struct s_philo
 {
-	int				id;
-	int				meals_required;
-	time_t			last_meal;
-	t_table			*table;
+	int			id;
+	int			meals_required;
+	time_t		last_meal;
+	t_table		*table;
 }	t_philo;
 
 typedef struct s_table
 {
-	time_t			timer;
-	int				total_philos;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				meals_needed;
-	int				is_exit;
-	int				has_dead_philo;
-	sem_t			*sem_print;
-	sem_t			*sem_is_exit;
-	sem_t			*sem_is_dead;
-	sem_t			*sem_global;
-	sem_t			*sem_forks;
-	t_philo			philo[MAX_PHILO];
+	time_t		timer;
+	int			total_philos;
+	int			time_to_die;
+	int			time_to_eat;
+	int			time_to_sleep;
+	int			meals_needed;
+	int			is_exit;
+	int			has_dead_philo;
+	pid_t		pid;
+	sem_t		*sem_print;
+	sem_t		*sem_is_exit;
+	sem_t		*sem_is_dead;
+	sem_t		*sem_global;
+	sem_t		*sem_forks;
+	t_philo		philo[MAX_PHILO];
 }	t_table;
 
 // Error Handling
@@ -105,7 +107,7 @@ void	cleanup(t_table *table);
 // Utils semaphore
 
 void	my_sem_remove(sem_t *sem, char *sem_file);
-
+void	cleanup_semaphores(t_table *table);
 
 // Utils libft
 
@@ -128,7 +130,7 @@ void	assign_forks(t_philo *philo, t_table *table);
 
 // Routine
 
-void	*routine(void *data);
+void	routine(t_philo *philo);
 void	*lonely_philo(t_philo *philo);
 
 // Utils philo
@@ -142,9 +144,5 @@ int		is_dead(t_philo *philo);
 
 void	print_action(t_philo *philo, t_status status);
 void	print_status(t_philo *philo, char *str, t_status status);
-
-// Unit tests
-
-void	TEST_CHECK_INIT(t_table *table);
 
 #endif
