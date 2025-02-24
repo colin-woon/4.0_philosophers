@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:44:44 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 14:53:19 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 15:09:49 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,25 @@ int	is_exit_simulation(t_table *table)
 	int	status;
 
 	status = 0;
-	pthread_mutex_lock(&table->lock_is_exit);
+	sem_wait(table->sem_is_exit);
 	if (table->is_exit == 1)
 		status = 1;
-	pthread_mutex_unlock(&table->lock_is_exit);
+	sem_post(table->sem_is_exit);
 	return (status);
 }
 
-int	is_dead(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->lock_eat_routine);
-	if (get_time_in_ms() - philo->last_meal >= philo->table->time_to_die)
-	{
-		print_action(philo, DIED);
-		pthread_mutex_lock(&philo->table->lock_is_exit);
-		philo->table->is_exit = 1;
-		pthread_mutex_unlock(&philo->table->lock_is_exit);
-		pthread_mutex_unlock(&philo->lock_eat_routine);
-		return (1);
-	}
-	pthread_mutex_unlock(&philo->lock_eat_routine);
-	return (0);
-}
+// int	is_dead(t_philo *philo)
+// {
+// 	pthread_mutex_lock(&philo->lock_eat_routine);
+// 	if (get_time_in_ms() - philo->last_meal >= philo->table->time_to_die)
+// 	{
+// 		print_action(philo, DIED);
+// 		pthread_mutex_lock(&philo->table->lock_is_exit);
+// 		philo->table->is_exit = 1;
+// 		pthread_mutex_unlock(&philo->table->lock_is_exit);
+// 		pthread_mutex_unlock(&philo->lock_eat_routine);
+// 		return (1);
+// 	}
+// 	pthread_mutex_unlock(&philo->lock_eat_routine);
+// 	return (0);
+// }

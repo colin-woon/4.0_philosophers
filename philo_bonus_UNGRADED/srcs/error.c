@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 20:16:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 14:52:48 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 15:05:50 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	handle_error(t_table *table, int error_num);
 void	cleanup(t_table *table);
-void	destroy_mutexes(t_table *table);
 
 void	handle_error(t_table *table, int error_num)
 {
@@ -35,20 +34,13 @@ void	cleanup(t_table *table)
 {
 	if (table->sem_print)
 		my_sem_remove(table->sem_print, PRINT_SEM);
+	if (table->sem_is_dead)
+		my_sem_remove(table->sem_is_dead, IS_DEAD_SEM);
+	if (table->sem_is_exit)
+		my_sem_remove(table->sem_is_exit, IS_EXIT_SEM);
+	if (table->sem_global)
+		my_sem_remove(table->sem_global, GLOBAL_SEM);
+	if (table->sem_forks)
+			my_sem_remove(table->sem_forks, FORKS_SEM);
 }
 
-void	destroy_mutexes(t_table *table)
-{
-	int	i;
-
-	i = 0;
-	while (i < table->total_philos)
-	{
-		pthread_mutex_destroy(&table->lock_forks[i]);
-		pthread_mutex_destroy(&table->philo[i].lock_eat_routine);
-		i++;
-	}
-	pthread_mutex_destroy(&table->lock_is_exit);
-	pthread_mutex_destroy(&table->lock_print);
-	pthread_mutex_destroy(&table->lock_is_dead);
-}

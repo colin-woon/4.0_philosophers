@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:21:35 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 14:52:24 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 15:01:25 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	initialize_philo(t_table *table)
 	{
 		table->philo[i].id = i;
 		table->philo[i].meals_required = table->meals_needed;
-		assign_forks(&table->philo[i], table);
+		// assign_forks(&table->philo[i], table);
 		table->philo[i].last_meal = 0;
 		table->philo[i].table = table;
 		i++;
