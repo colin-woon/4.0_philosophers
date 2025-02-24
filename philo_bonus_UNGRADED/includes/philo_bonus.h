@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 15:32:33 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 17:36:19 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <pthread.h>
 # include <semaphore.h>
 # include <fcntl.h>
+# include <signal.h>
 
 # define ARG_ERROR -1
 # define FORMAT_ERROR -2
@@ -91,7 +92,7 @@ typedef struct s_table
 	int			meals_needed;
 	int			is_exit;
 	int			has_dead_philo;
-	pid_t		pid;
+	pid_t		pid[MAX_PHILO];
 	sem_t		*sem_print;
 	sem_t		*sem_is_exit;
 	sem_t		*sem_is_dead;

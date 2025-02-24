@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:21:35 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 15:32:14 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 17:45:43 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	initialize(t_table *table, int ac, char **av)
 		table->meals_needed = ft_atoi(av[5]);
 	table->is_exit = 0;
 	table->has_dead_philo = 0;
+	memset(table->pid, 0, sizeof(pid_t *));
 	initialize_semaphores(table);
 	initialize_philo(table);
 }
@@ -51,6 +52,7 @@ void	initialize_philo(t_table *table)
 
 void	initialize_semaphores(t_table *table)
 {
+	cleanup(table);
 	table->sem_print = sem_open(PRINT_SEM, O_CREAT, 0644, 1);
 	table->sem_is_dead = sem_open(IS_DEAD_SEM, O_CREAT, 0644, 1);
 	table->sem_is_exit = sem_open(IS_EXIT_SEM, O_CREAT, 0644, 1);
