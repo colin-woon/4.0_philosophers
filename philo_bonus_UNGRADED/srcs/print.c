@@ -6,11 +6,11 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:39:46 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 21:12:29 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 14:53:03 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 void	print_action(t_philo *philo, t_status status);
 void	print_status(t_philo *philo, char *str, t_status status);

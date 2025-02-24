@@ -6,11 +6,11 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 22:10:31 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/26 18:46:25 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 14:52:58 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int	validate_args(char *str);
 int	parse_args(char **av);

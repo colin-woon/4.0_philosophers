@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 14:05:22 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 14:48:47 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # define THREAD_ERROR -5
 
 # define PRINT_SEM "/semaphore_print"
+# define IS_DEAD_SEM "/semaphore_is_dead"
+# define IS_EXIT_SEM "/semaphore_is_exit"
+# define GLOBAL_SEM "/semaphore_global"
+# define FORKS_SEM "/semaphore_forks"
 
 # define CYAN "\033[1;36m"
 # define PURPLE "\033[1;35m"
@@ -69,12 +73,9 @@ typedef struct s_table	t_table;
 
 typedef struct s_philo
 {
-	pthread_t		thread;
 	int				id;
 	int				meals_required;
-	int				fork[2];
 	time_t			last_meal;
-	pthread_mutex_t	lock_eat_routine;
 	t_table			*table;
 }	t_philo;
 
@@ -89,11 +90,10 @@ typedef struct s_table
 	int				is_exit;
 	int				has_dead_philo;
 	sem_t			*sem_print;
-	pthread_mutex_t	lock_print;
-	pthread_mutex_t	lock_is_exit;
-	pthread_mutex_t	lock_is_dead;
-	pthread_mutex_t	lock_global;
-	pthread_mutex_t	lock_forks[MAX_PHILO];
+	sem_t			*sem_is_exit;
+	sem_t			*sem_is_dead;
+	sem_t			*sem_global;
+	sem_t			*sem_forks;
 	t_philo			philo[MAX_PHILO];
 }	t_table;
 
@@ -123,7 +123,7 @@ int		parse_args(char **av);
 // Initialize
 
 void	initialize(t_table *table, int ac, char **av);
-void	initialize_locks(t_table *table);
+void	initialize_semaphores(t_table *table);
 void	initialize_philo(t_table *table);
 void	assign_forks(t_philo *philo, t_table *table);
 

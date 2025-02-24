@@ -6,11 +6,11 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:48 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/18 20:11:41 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 14:52:41 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 void	simulate(t_table *table);
 void	exit_simulation(t_table *table);
@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 	if (parse_args(av) == 0)
 		handle_error(NULL, FORMAT_ERROR);
 	initialize(&table, ac, av);
-	simulate(&table);
+	// simulate(&table);
 	exit_simulation(&table);
 	return (EXIT_SUCCESS);
 }
@@ -83,7 +83,7 @@ void	exit_simulation(t_table *table)
 	int	i;
 
 	i = 0;
-	while (i < table->total_philos)
-		pthread_join(table->philo[i++].thread, NULL);
+	// while (i < table->total_philos)
+	// 	pthread_join(table->philo[i++].thread, NULL);
 	cleanup(table);
 }

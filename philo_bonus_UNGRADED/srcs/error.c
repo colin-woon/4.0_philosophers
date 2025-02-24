@@ -6,11 +6,11 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 20:16:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 14:06:04 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 14:52:48 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 void	handle_error(t_table *table, int error_num);
 void	cleanup(t_table *table);
@@ -33,8 +33,6 @@ void	handle_error(t_table *table, int error_num)
 
 void	cleanup(t_table *table)
 {
-	if (table->total_philos)
-		destroy_mutexes(table);
 	if (table->sem_print)
 		my_sem_remove(table->sem_print, PRINT_SEM);
 }

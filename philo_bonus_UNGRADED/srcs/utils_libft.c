@@ -6,11 +6,11 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:58:25 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/19 21:12:18 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 14:53:15 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int		ft_strlen(const char *str);
 void	ft_putstr_fd(char *s, int fd);

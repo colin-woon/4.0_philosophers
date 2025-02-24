@@ -6,11 +6,11 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:44:44 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 21:12:55 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 14:53:19 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 time_t	get_time_in_ms(void);
 void	waiting(t_table *table, time_t waiting_time);
