@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 20:16:26 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/02 20:17:44 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 14:06:04 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	cleanup(t_table *table)
 {
 	if (table->total_philos)
 		destroy_mutexes(table);
+	if (table->sem_print)
+		my_sem_remove(table->sem_print, PRINT_SEM);
 }
 
 void	destroy_mutexes(t_table *table)

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/18 20:07:26 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 14:05:22 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
+# include <semaphore.h>
+# include <fcntl.h>
 
 # define ARG_ERROR -1
 # define FORMAT_ERROR -2
 # define MALLOC_ERROR -3
 # define MUTEX_ERROR -4
 # define THREAD_ERROR -5
+
+# define PRINT_SEM "/semaphore_print"
 
 # define CYAN "\033[1;36m"
 # define PURPLE "\033[1;35m"
@@ -84,7 +88,7 @@ typedef struct s_table
 	int				meals_needed;
 	int				is_exit;
 	int				has_dead_philo;
-	pthread_t		monitor;
+	sem_t			*sem_print;
 	pthread_mutex_t	lock_print;
 	pthread_mutex_t	lock_is_exit;
 	pthread_mutex_t	lock_is_dead;
@@ -98,6 +102,11 @@ typedef struct s_table
 void	handle_error(t_table *table, int error_num);
 void	cleanup(t_table *table);
 void	destroy_mutexes(t_table *table);
+
+// Utils semaphore
+
+void	my_sem_remove(sem_t *sem, char *sem_file);
+
 
 // Utils libft
 

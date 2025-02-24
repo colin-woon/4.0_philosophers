@@ -11,12 +11,12 @@
 
 # Compiler and flags
 CC				=	clang
-CFLAGS			=	$(TEMP) $(DEBUG) $(THREAD_FLAG) -I$(INC_DIR) $(DEBUG_THREAD)
+CFLAGS			=	$(TEMP) $(DEBUG) $(THREAD_FLAG) -I$(INC_DIR)
 TEMP			=	-Wall -Werror -Wextra
 DEBUG			=	-g3
 DEBUG_THREAD	=	-fsanitize=thread
 DEBUG_MEMORY	=	-fsanitize=memory
-DEBUG_ADDRESS	=	-fsanitize=address
+DEBUG_ADDRESS	=	-fsanitize=address,leak
 RM				=	rm -rf
 THREAD_FLAG		=	-pthread
 
@@ -36,6 +36,7 @@ SRCS_FILES		=	srcs/error.c \
 					srcs/print.c \
 					srcs/utils_libft.c \
 					srcs/utils_philo.c \
+					srcs/utils_semaphore.c \
 
 OBJS_FILES		=	$(patsubst %.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
 
@@ -49,7 +50,6 @@ bonus: all
 
 # Generates output file
 $(NAME): $(OBJS_FILES)
-	export TSAN_OPTIONS=second_deadlock_stack=1
 	$(CC) $(CFLAGS) $(OBJS_FILES) -o $(NAME)
 
 # Rule to compile the mandatory object files

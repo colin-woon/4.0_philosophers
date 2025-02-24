@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:21:35 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/18 20:07:40 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 13:53:45 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	initialize(t_table *table, int ac, char **av)
 	table->has_dead_philo = 0;
 	initialize_locks(table);
 	initialize_philo(table);
+	table->sem_print = sem_open(PRINT_SEM, O_CREAT, 0644, 1);
 }
 
 void	initialize_philo(t_table *table)
