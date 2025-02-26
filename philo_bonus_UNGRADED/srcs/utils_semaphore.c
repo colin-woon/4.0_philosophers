@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:02:05 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 15:22:15 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/26 17:07:42 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	cleanup_semaphores(t_table *table)
 		my_sem_remove(table->sem_is_exit, IS_EXIT_SEM);
 	if (table->sem_global)
 		my_sem_remove(table->sem_global, GLOBAL_SEM);
+	if (table->sem_eat_routine)
+		my_sem_remove(table->sem_eat_routine, EAT_ROUTINE_SEM);
 	if (table->sem_forks)
 		my_sem_remove(table->sem_forks, FORKS_SEM);
 }

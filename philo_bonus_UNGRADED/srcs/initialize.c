@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:21:35 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 17:45:43 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/26 17:08:20 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 void	initialize(t_table *table, int ac, char **av);
 void	initialize_semaphores(t_table *table);
 void	initialize_philo(t_table *table);
-void	assign_forks(t_philo *philo, t_table *table);
 
 void	initialize(t_table *table, int ac, char **av)
 {
+	int	i;
+
+	i = 0;
 	table->timer = 0;
 	table->total_philos = ft_atoi(av[1]);
 	table->time_to_die = ft_atoi(av[2]);
@@ -29,7 +31,8 @@ void	initialize(t_table *table, int ac, char **av)
 		table->meals_needed = ft_atoi(av[5]);
 	table->is_exit = 0;
 	table->has_dead_philo = 0;
-	memset(table->pid, 0, sizeof(pid_t *));
+	while (i < MAX_PHILO)
+		table->pid[i++] = -1;
 	initialize_semaphores(table);
 	initialize_philo(table);
 }
@@ -43,7 +46,6 @@ void	initialize_philo(t_table *table)
 	{
 		table->philo[i].id = i;
 		table->philo[i].meals_required = table->meals_needed;
-		// assign_forks(&table->philo[i], table);
 		table->philo[i].last_meal = 0;
 		table->philo[i].table = table;
 		i++;
@@ -52,7 +54,7 @@ void	initialize_philo(t_table *table)
 
 void	initialize_semaphores(t_table *table)
 {
-	cleanup(table);
+	// cleanup(table);
 	table->sem_print = sem_open(PRINT_SEM, O_CREAT, 0644, 1);
 	table->sem_is_dead = sem_open(IS_DEAD_SEM, O_CREAT, 0644, 1);
 	table->sem_is_exit = sem_open(IS_EXIT_SEM, O_CREAT, 0644, 1);
@@ -60,9 +62,3 @@ void	initialize_semaphores(t_table *table)
 	table->sem_eat_routine = sem_open(EAT_ROUTINE_SEM, O_CREAT, 0644, 1);
 	table->sem_forks = sem_open(FORKS_SEM, O_CREAT, 0644, table->total_philos);
 }
-
-// void	assign_forks(t_philo *philo, t_table *table)
-// {
-// 	philo->fork[0] = philo->id;
-// 	philo->fork[1] = (philo->id + 1) % table->total_philos;
-// }

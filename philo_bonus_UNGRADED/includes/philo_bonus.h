@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 17:36:19 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 17:54:43 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ int		parse_args(char **av);
 void	initialize(t_table *table, int ac, char **av);
 void	initialize_semaphores(t_table *table);
 void	initialize_philo(t_table *table);
-void	assign_forks(t_philo *philo, t_table *table);
 
 // Routine
 
