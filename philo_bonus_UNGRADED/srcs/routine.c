@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:06:56 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 15:34:17 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/24 18:22:21 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	routine(t_philo *philo)
 	{
 		eat_routine(philo);
 		if (philo->meals_required == 0 || is_exit_simulation(philo->table))
-			break ;
+			exit(EXIT_SUCCESS);
 		sleep_think_routine(philo);
 	}
 }
@@ -54,6 +54,7 @@ void	eat_routine(t_philo *philo)
 	waiting(philo->table, philo->table->time_to_eat);
 	sem_wait(philo->table->sem_global);
 	philo->meals_required -= 1;
+	// printf("philo %d meals_required %d\n", philo->id, philo->meals_required);
 	sem_post(philo->table->sem_global);
 	sem_post(philo->table->sem_forks);
 	sem_post(philo->table->sem_forks);

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 17:54:43 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/26 17:17:33 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 # define MALLOC_ERROR -3
 # define MUTEX_ERROR -4
 # define THREAD_ERROR -5
+
+# define YES 1
+# define NO 0
 
 # define PRINT_SEM "/semaphore_print"
 # define IS_DEAD_SEM "/semaphore_is_dead"
@@ -105,7 +108,7 @@ typedef struct s_table
 // Error Handling
 
 void	handle_error(t_table *table, int error_num);
-void	cleanup(t_table *table);
+void	cleanup(t_table *table, int is_someone_dead);
 
 // Utils semaphore
 
