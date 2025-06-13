@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/26 17:17:33 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/06/13 14:59:15 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,12 @@ typedef struct s_table	t_table;
 
 typedef struct s_philo
 {
-	int			id;
-	int			meals_required;
-	time_t		last_meal;
-	t_table		*table;
+	int				id;
+	int				meals_required;
+	pthread_t		thread;
+	pthread_mutex_t	lock_last_meal;
+	time_t			last_meal;
+	t_table			*table;
 }	t_philo;
 
 typedef struct s_table
@@ -104,6 +106,9 @@ typedef struct s_table
 	sem_t		*sem_forks;
 	t_philo		philo[MAX_PHILO];
 }	t_table;
+
+
+void	monitor_death(t_table *table);
 
 // Error Handling
 

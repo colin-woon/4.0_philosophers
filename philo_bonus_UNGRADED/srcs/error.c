@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 20:16:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/26 17:16:20 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/06/13 15:09:24 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	handle_error(t_table *table, int error_num);
 void	cleanup(t_table *table, int is_someone_dead);
+void	destroy_mutexes(t_table *table);
+
 
 void	handle_error(t_table *table, int error_num)
 {
@@ -33,12 +35,25 @@ void	handle_error(t_table *table, int error_num)
 void	cleanup(t_table *table, int is_someone_dead)
 {
 	cleanup_semaphores(table);
+	destroy_mutexes(table);
 	if (is_someone_dead)
 		kill(0, SIGKILL);
 	else
 	{
 		while(waitpid(-1, NULL, WUNTRACED) != -1)
 			;
+	}
+}
+
+void	destroy_mutexes(t_table *table)
+{
+	int	i;
+
+	i = 0;
+	while (i < table->total_philos)
+	{
+		pthread_mutex_destroy(&table->philo[i].lock_last_meal);
+		i++;
 	}
 }
 
