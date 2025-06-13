@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/06/13 14:59:15 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/06/13 15:40:58 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_philo
 	int				meals_required;
 	pthread_t		thread;
 	pthread_mutex_t	lock_last_meal;
+	pthread_mutex_t	lock_meals_required;
 	time_t			last_meal;
 	t_table			*table;
 }	t_philo;
@@ -148,7 +149,7 @@ void	lonely_philo(t_philo *philo);
 time_t	get_time_in_ms(void);
 void	waiting(t_table *table, time_t waiting_time);
 int		is_exit_simulation(t_table *table);
-int		is_dead(t_philo *philo);
+// int		is_dead(t_philo *philo);
 
 // Print
 

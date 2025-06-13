@@ -6,14 +6,14 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:48 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/26 17:20:55 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/06/13 15:41:40 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
 void	simulate(t_table *table);
-void	monitor_death(t_table *table);
+// void	monitor_death(t_table *table);
 
 int	main(int ac, char **av)
 {
@@ -29,28 +29,38 @@ int	main(int ac, char **av)
 	return (EXIT_SUCCESS);
 }
 
-void	monitor_death(t_table *table)
-{
-	int	i;
-	int	infinite;
+// void	monitor_death(t_table *table)
+// {
+// 	int	i;
+// 	int	infinite;
+// 	int	philo_is_full;
 
-	i = 0;
-	infinite = 1;
-	while (infinite)
-	{
-		i = 0;
-		while (infinite && i < table->total_philos)
-		{
-			usleep(100);
-			sem_wait(table->sem_global);
-			if (is_exit_simulation(table) \
-				|| is_dead(&table->philo[i]))
-					cleanup(table, YES);
-				i++;
-			sem_post(table->sem_global);
-		}
-	}
-}
+// 	i = 0;
+// 	infinite = 1;
+// 	philo_is_full = 0;
+// 	while (infinite)
+// 	{
+// 		i = 0;
+// 		while (infinite && i < table->total_philos)
+// 		{
+// 			if (philo_is_full == table->total_philos)
+// 			{
+// 				infinite = 1;
+// 				break ;
+// 			}
+// 			usleep(100);
+// 			sem_wait(table->sem_global);
+// 			// printf("ID: %d, meals %d \n", i, table->philo[i].meals_required);
+// 			if (table->philo[i].meals_required == 0)
+// 				philo_is_full++;
+// 			else if (is_dead(&table->philo[i]))
+// 				cleanup(table, YES);
+// 			i++;
+// 			sem_post(table->sem_global);
+// 		}
+// 	}
+// 	sem_post(table->sem_global);
+// }
 
 void	simulate(t_table *table)
 {
@@ -68,6 +78,6 @@ void	simulate(t_table *table)
 			routine(&table->philo[i]);
 		i++;
 	}
-	if (table->total_philos > 1)
-		monitor_death(table);
+	// if (table->total_philos > 1)
+	// 	monitor_death(table);
 }

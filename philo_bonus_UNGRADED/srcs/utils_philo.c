@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:44:44 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 15:39:22 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/06/13 15:42:05 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,20 @@ int	is_exit_simulation(t_table *table)
 	return (status);
 }
 
-int	is_dead(t_philo *philo)
-{
-	sem_wait(philo->table->sem_eat_routine);
-	if (get_time_in_ms() - philo->last_meal >= philo->table->time_to_die)
-	{
-		print_action(philo, DIED);
-		sem_wait(philo->table->sem_is_exit);
-		philo->table->is_exit = 1;
-		sem_post(philo->table->sem_is_exit);
-		sem_post(philo->table->sem_eat_routine);
-		return (1);
-	}
-	sem_post(philo->table->sem_eat_routine);
-	return (0);
-}
+// int	is_dead(t_philo *philo)
+// {
+// 	sem_wait(philo->table->sem_eat_routine);
+// 	printf("CHECKING: %ld\n", get_time_in_ms() - philo->last_meal);
+// 	if (get_time_in_ms() - philo->last_meal >= philo->table->time_to_die)
+// 	{
+// 		printf("chekcing\n");
+// 		print_action(philo, DIED);
+// 		sem_wait(philo->table->sem_is_exit);
+// 		philo->table->is_exit = 1;
+// 		sem_post(philo->table->sem_is_exit);
+// 		sem_post(philo->table->sem_eat_routine);
+// 		return (1);
+// 	}
+// 	sem_post(philo->table->sem_eat_routine);
+// 	return (0);
+// }
