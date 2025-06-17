@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:39:46 by cwoon             #+#    #+#             */
-/*   Updated: 2025/06/17 17:53:30 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/06/17 19:27:57 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,21 @@ void	print_action(t_philo *philo, t_status status)
 		sem_post(philo->table->sem_is_dead);
 	}
 	else if (status == EATING)
+	{
 		print_status(philo, "is eating", status);
+		sem_wait(philo->table->sem_meals_required);
+		philo->meals_required -= 1;
+		sem_post(philo->table->sem_meals_required);
+		if (philo->meals_required == 0)
+		{
+			sem_post(philo->table->sem_print);
+			sem_post(philo->table->sem_forks);
+			sem_post(philo->table->sem_forks);
+			printf("full meal\n");
+			kill(philo->pid, SIGKILL);
+			exit(0);
+		}
+	}
 	else if (status == SLEEPING)
 		print_status(philo, "is sleeping", status);
 		else if (status == THINKING)

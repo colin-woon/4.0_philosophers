@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:06:56 by cwoon             #+#    #+#             */
-/*   Updated: 2025/06/17 17:53:19 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/06/17 19:10:18 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ void	eat_routine(t_philo *philo)
 	philo->last_meal = get_time_in_ms();
 	sem_post(philo->table->sem_last_meal);
 	waiting(philo->table, philo->table->time_to_eat);
-	sem_wait(philo->table->sem_meals_required);
-	philo->meals_required -= 1;
-	sem_post(philo->table->sem_meals_required);
 	sem_post(philo->table->sem_forks);
 	sem_post(philo->table->sem_forks);
 }
@@ -79,16 +76,16 @@ void	monitor_routine(t_philo *philo)
 	while (!is_exit_simulation(philo->table))
 	{
 		usleep(100);
-		sem_wait(philo->table->sem_meals_required);
-		if (philo->meals_required == 0)
-		{
-			sem_wait(philo->table->sem_is_exit);
-			philo->table->is_exit = 1;
-			sem_post(philo->table->sem_is_exit);
-			sem_post(philo->table->sem_meals_required);
-			break ;
-		}
-		sem_post(philo->table->sem_meals_required);
+		// sem_wait(philo->table->sem_meals_required);
+		// if (philo->meals_required == 0)
+		// {
+		// 	sem_wait(philo->table->sem_is_exit);
+		// 	philo->table->is_exit = 1;
+		// 	sem_post(philo->table->sem_is_exit);
+		// 	sem_post(philo->table->sem_meals_required);
+		// 	break ;
+		// }
+		// sem_post(philo->table->sem_meals_required);
 		if (is_dead(philo))
 		{
 			// cleanup(philo->table, YES);
