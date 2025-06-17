@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:39:46 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/24 15:03:53 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/06/17 17:53:30 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,22 @@ void	print_status(t_philo *philo, char *str, t_status status);
 void	print_action(t_philo *philo, t_status status)
 {
 	sem_wait(philo->table->sem_print);
-	if (is_exit_simulation(philo->table))
+	if (is_exit_simulation(philo->table) && status != DIED)
 	{
 		sem_post(philo->table->sem_print);
 		return ;
 	}
 	if (status == DIED)
-		print_status(philo, "died", status);
+	{
+		sem_wait(philo->table->sem_is_dead);
+		if (!philo->table->has_dead_philo)
+		{
+			philo->table->has_dead_philo += 1;
+			print_status(philo, "died", status);
+			cleanup(philo->table, YES);
+		}
+		sem_post(philo->table->sem_is_dead);
+	}
 	else if (status == EATING)
 		print_status(philo, "is eating", status);
 	else if (status == SLEEPING)

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:21:35 by cwoon             #+#    #+#             */
-/*   Updated: 2025/06/13 15:30:08 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/06/13 17:48:22 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,11 @@ void	initialize_philo(t_table *table)
 	i = 0;
 	while (i < table->total_philos)
 	{
+		table->philo[i].pid = -1;
 		table->philo[i].id = i;
 		table->philo[i].meals_required = table->meals_needed;
 		table->philo[i].last_meal = 0;
 		table->philo[i].table = table;
-		if (pthread_mutex_init(&table->philo[i].lock_last_meal, 0) != 0 \
-|| pthread_mutex_init(&table->philo[i].lock_meals_required, 0) !=0 )
-			return (handle_error(table, MUTEX_ERROR));
 		i++;
 	}
 }
@@ -64,4 +62,6 @@ void	initialize_semaphores(t_table *table)
 	table->sem_global = sem_open(GLOBAL_SEM, O_CREAT, 0644, 1);
 	table->sem_eat_routine = sem_open(EAT_ROUTINE_SEM, O_CREAT, 0644, 1);
 	table->sem_forks = sem_open(FORKS_SEM, O_CREAT, 0644, table->total_philos);
+	table->sem_last_meal = sem_open(LAST_MEAL_SEM, O_CREAT, 0644, 1);
+	table->sem_meals_required = sem_open(MEALS_REQUIRED_SEM, O_CREAT, 0644, 1);
 }

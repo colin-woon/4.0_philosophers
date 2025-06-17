@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:02:05 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/26 17:07:42 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/06/13 17:47:10 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,9 @@ void	cleanup_semaphores(t_table *table)
 		my_sem_remove(table->sem_eat_routine, EAT_ROUTINE_SEM);
 	if (table->sem_forks)
 		my_sem_remove(table->sem_forks, FORKS_SEM);
+	if (table->sem_last_meal)
+		my_sem_remove(table->sem_last_meal, LAST_MEAL_SEM);
+	if (table->sem_meals_required)
+		my_sem_remove(table->sem_meals_required, MEALS_REQUIRED_SEM);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:44:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/06/13 15:40:58 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/06/13 17:46:42 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # define GLOBAL_SEM "/semaphore_global"
 # define EAT_ROUTINE_SEM "/semaphore_eat_routine"
 # define FORKS_SEM "/semaphore_forks"
+# define LAST_MEAL_SEM "/semaphore_last_meal"
+# define MEALS_REQUIRED_SEM "/semaphore_meals_required"
 
 # define CYAN "\033[1;36m"
 # define PURPLE "\033[1;35m"
@@ -79,13 +81,11 @@ typedef struct s_table	t_table;
 
 typedef struct s_philo
 {
-	int				id;
-	int				meals_required;
-	pthread_t		thread;
-	pthread_mutex_t	lock_last_meal;
-	pthread_mutex_t	lock_meals_required;
-	time_t			last_meal;
-	t_table			*table;
+	int			id;
+	int			meals_required;
+	pid_t		pid;
+	time_t		last_meal;
+	t_table		*table;
 }	t_philo;
 
 typedef struct s_table
@@ -99,6 +99,8 @@ typedef struct s_table
 	int			is_exit;
 	int			has_dead_philo;
 	pid_t		pid[MAX_PHILO];
+	sem_t		*sem_last_meal;
+	sem_t		*sem_meals_required;
 	sem_t		*sem_print;
 	sem_t		*sem_is_exit;
 	sem_t		*sem_is_dead;
