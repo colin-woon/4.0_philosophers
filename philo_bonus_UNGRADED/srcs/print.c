@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:39:46 by cwoon             #+#    #+#             */
-/*   Updated: 2025/06/17 19:27:57 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/06/17 19:52:13 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	print_action(t_philo *philo, t_status status)
 			sem_post(philo->table->sem_forks);
 			sem_post(philo->table->sem_forks);
 			printf("full meal\n");
-			kill(philo->pid, SIGKILL);
+			// kill(philo->pid, SIGKILL);
 			exit(0);
 		}
 	}

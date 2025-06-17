@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:06:56 by cwoon             #+#    #+#             */
-/*   Updated: 2025/06/17 19:10:18 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/06/17 19:48:56 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,24 @@ void	routine(t_philo *philo)
 {
 	if (philo->table->total_philos == 1)
 		return (lonely_philo(philo));
-	else
-	{
-		philo->pid = fork();
-		if (philo->pid == 0)
-			monitor_routine(philo);
-	}
+	// else
+	// {
+	// 	philo->pid = fork();
+	// 	if (philo->pid == 0)
+	// 		monitor_routine(philo);
+	// }
 	if (philo->id % 2)
 		waiting(philo->table, philo->table->time_to_sleep);
-	while (!is_exit_simulation(philo->table))
+	while (!is_dead(philo))
 	{
+		if (is_exit_simulation(philo->table))
+			exit(EXIT_SUCCESS);
 		eat_routine(philo);
 		if (is_exit_simulation(philo->table))
 			exit(EXIT_SUCCESS);
 		sleep_think_routine(philo);
+		if (is_exit_simulation(philo->table))
+			exit(EXIT_SUCCESS);
 	}
 }
 
@@ -97,7 +101,7 @@ void	monitor_routine(t_philo *philo)
 int	is_dead(t_philo *philo)
 {
 	sem_wait(philo->table->sem_last_meal);
-	// printf("ID:%d CHECKING: %ld\n", philo->id, get_time_in_ms() - philo->last_meal);
+	printf("ID:%d CHECKING: %ld\n", philo->id, get_time_in_ms() - philo->last_meal);
 	if (get_time_in_ms() - philo->last_meal >= philo->table->time_to_die)
 	{
 		sem_wait(philo->table->sem_is_exit);
